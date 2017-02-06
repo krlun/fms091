@@ -1,4 +1,4 @@
-function [IAS] = exc2c(N, k, lambda, lambdap)
+function [IAS] = exc2c(N, lambda, k, lambdap)
 %EXC2C uses antithetic sampling to reduce the variance in calculating
 %the a confidence interval for the estimated power output of a
 %Nordex N90-2500 LS wind turbine, where the wind is modelled using a

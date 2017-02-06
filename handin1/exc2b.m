@@ -1,4 +1,4 @@
-function [IIS] = exc2b(N, k, lambda, lambdap)
+function [IIS] = exc2b(N, lambda, k, lambdap)
 %EXC2B uses importance sampling with a gamma function as g(x) to
 %reduce the variance in estimating the confidence interval for the power
 %output of a Nordex N90-2500 LS wind turbine. The wind is modelled using

@@ -1,4 +1,4 @@
-function [I, ITrun] = exc2a(N, k, lambda, lambdap)
+function [I, ITrun] = exc2a(N, lambda, k, lambdap)
 %EXC2B calculates a 95% confidence interval for the expected power output
 %of a Nordex N90-2500 LS wind turbine, given a that a Weibull distribution 
 %describes the wind, both using a non truncated interval for the wind, as
