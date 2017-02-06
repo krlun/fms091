@@ -38,5 +38,5 @@ function [confLess, confEqual, confMore] = exc3d(N, k, lambda, lambdap)
     VMore = 1/N*var(W .* IMore);
     confMore = [tauMore - lambdap*sqrt(VMore), tauMore, ...
         tauMore + lambdap * sqrt(VMore)];
-1
+
 end
