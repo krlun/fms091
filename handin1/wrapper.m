@@ -5,7 +5,7 @@ B = k;
 A = lambda;
 N = 10000; % # of samples for MC simulation
 
-[I, ITrun] = exc2a(N, lambda, k, lambdap);
-[IIS] = exc2b(N, lambda, k, lambdap);
-[IAS] = exc2c(N, lambda, k, lambdap);
-[P] = exc2d(lambda, k);
+[I, ITrun] = exc2a(N, k, lambda, lambdap);
+[IIS] = exc2b(N, k, lambda, lambdap);
+[IAS] = exc2c(N, k, lambda, lambdap);
+[P] = exc2d(k, lambda);
