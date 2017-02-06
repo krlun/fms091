@@ -22,21 +22,22 @@ function [confLess, confEqual, confMore] = exc3d(N, k, lambda, lambdap)
     ILess = powerTotal < 2.5*10^6;
     IEqual = powerTotal == 2.5*10^6;
 
+    %W = fv1v2(R(:,1), R(:,2)) * 21.5^2; % f(v1,v2)/g(v1,v2)
     W = fv1v2(R(:,1), R(:,2)) * 30^2; % f(v1,v2)/g(v1,v2)
     
     tauLess = sum(W.*ILess)/N;
-    VLess = 1/N*var(W.*ILess);
-    confLess = [tauLess - lambdap*sqrt(VLess), tauLess, ...
-        tauLess + lambdap * sqrt(VLess)];
+    VLess = var(W.*ILess);
+    confLess = [tauLess - lambdap*sqrt(VLess/N), tauLess, ...
+        tauLess + lambdap * sqrt(VLess/N)];
 
     tauEqual = sum(W.*IEqual)/N;
-    VEqual = 1/N*var(W.*IEqual);
-    confEqual = [tauEqual - lambdap*sqrt(VEqual), tauEqual, ...
-        tauEqual + lambdap*sqrt(VEqual)];
+    VEqual = var(W.*IEqual);
+    confEqual = [tauEqual - lambdap*sqrt(VEqual/N), tauEqual, ...
+        tauEqual + lambdap*sqrt(VEqual/N)];
 
     tauMore = sum(W.*IMore)/N;
-    VMore = 1/N*var(W .* IMore);
-    confMore = [tauMore - lambdap*sqrt(VMore), tauMore, ...
-        tauMore + lambdap * sqrt(VMore)];
+    VMore = var(W .* IMore);
+    confMore = [tauMore - lambdap*sqrt(VMore/N), tauMore, ...
+        tauMore + lambdap * sqrt(VMore/N)];
 
 end
