@@ -5,7 +5,7 @@ function [I, ITrun] = exc2a(N, k, lambda, lambdap)
 %well as a truncated interval where the wind falls within the span where
 %the turbine actually produces power.
 
-    load('powercurve_N90.mat')
+    load('powercurve_N90.mat');
 
     MCEst = P(wblrnd(lambda, k, 1, N));
     tauN = sum(MCEst)/N;

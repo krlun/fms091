@@ -4,7 +4,7 @@ function [IIS] = exc2b(N, k, lambda, lambdap)
 %output of a Nordex N90-2500 LS wind turbine. The wind is modelled using
 %a Weibull distribution.
 
-    load('powercurve_N90.mat')
+    load('powercurve_N90.mat');
     
     MC = gamrnd(12, 1, 1, N);
     MCest = P(MC)'.*wblpdf(MC, lambda, k)./gampdf(MC, 12, 1);
