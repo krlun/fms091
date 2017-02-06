@@ -4,8 +4,10 @@ lambdap = norminv(0.975); % 95% confidence interval
 B = k;
 A = lambda;
 N = 10000; % # of samples for MC simulation
+d = 90; % diameter of rotors
 
 [I, ITrun] = exc2a(N, k, lambda, lambdap);
 [IIS] = exc2b(N, k, lambda, lambdap);
 [IAS] = exc2c(N, k, lambda, lambdap);
 [P] = exc2d(k, lambda);
+exc2e(k, lambda, rho, d);
