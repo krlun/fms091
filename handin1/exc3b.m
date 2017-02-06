@@ -17,17 +17,4 @@ function [C] = exc3b(N, E, k, lambda)
     E2 = sum(W)/N;
     C = E2 - E^2;
 
-%     X = 3.5 + (25-3.5).*rand(N,1);
-%     Y = 3.5 + (25-3.5).*rand(N,1);
-% 
-%     MCestXY = (P(X).*P(Y).*wblpdf(X, A, B).*wblpdf(Y, A, B).*(1+alpha.*(1-wblcdf(X, A, B).^p).^(q-1).*(1-wblcdf(Y, A, B).^p).^(q-1).*(wblcdf(X, A, B).^p.*(1+p*q)-1).*(wblcdf(Y, A, B).^p.*(1+p*q)-1)))./(1/((25-3.5)*(25-3.5)));
-%     tauXY = sum(MCestXY)/N
-% 
-%     MCestX = P(X).*wblpdf(X, A, B)/(1/(25-3.5));
-%     tauX = sum(MCestX)/N;
-%     MCestY = P(Y).*wblpdf(Y, A, B)/(1/(25-3.5));
-%     tauY = sum(MCestY)/N;
-% 
-%     cov = tauXY - tauX*tauY;
-
 end
