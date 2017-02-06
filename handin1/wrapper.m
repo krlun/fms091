@@ -10,4 +10,4 @@ d = 90; % diameter of rotors
 [IIS] = exc2b(N, k, lambda, lambdap);
 [IAS] = exc2c(N, k, lambda, lambdap);
 [P] = exc2d(k, lambda);
-exc2e(k, lambda, rho, d);
+[INormalized] = exc2e(k, lambda, rho, d);
