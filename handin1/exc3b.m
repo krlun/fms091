@@ -7,7 +7,7 @@ function [C] = exc3b(N, E, k, lambda)
     load('powercurve_N90.mat');
     alpha = 0.638; p = 3; q = 1.5;
     
-    f = @(v) wplpdf(v, lambda, k);
+    f = @(v) wblpdf(v, lambda, k);
     F = @(v) wblcdf(v, lambda, k);
     fv1v2 = @(v1, v2) f(v1).*f(v2).*(1+alpha*(1-F(v1).^p).^(q-1).*(1- ...
         F(v2).^p).^(q-1).*(F(v1).^p.*(1+p*q)-1).*(F(v2).^p.*(1+p*q)-1));
