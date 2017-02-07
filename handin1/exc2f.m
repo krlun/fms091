@@ -1,6 +1,5 @@
 function [capfact, availfact] = exc2f(N, k, lambda)
-%EXC2F Summary of this function goes here
-%   Detailed explanation goes here
+%EXC2F calculates capacity factor and available factor.
 
     load('powercurve_N90.mat');
 

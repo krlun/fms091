@@ -11,6 +11,7 @@ d = 90; % diameter of rotors
 [INormalized] = exc2e(k, lambda, rho, d, IAS);
 [capfact, availfact] = exc2f(N, k, lambda);
 
+[tau] = exc3a(N, k, lambda);
 [C] = exc3b(N, IAS(2), k, lambda);
 [VPXPY, SPXPY] = exc3c(N, IAS(2), C, k, lambda);
 [ILess, IEqual, IMore] = exc3d(N, k, lambda, lambdap);

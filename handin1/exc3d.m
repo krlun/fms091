@@ -1,6 +1,7 @@
 function [confLess, confEqual, confMore] = exc3d(N, k, lambda, lambdap)
-%EXC3D Summary of this function goes here
-%   Detailed explanation goes here
+%EXC3D calculates the probabilities P(P(V1) + P(V2) < 2.5*10^6), 
+%P(P(V1) + P(V2) > 2.5*10^6) and P(P(V1) + P(V2) = 2.5*10^6) and
+%returns three confidence intervals for these quantities.
 
     load('powercurve_N90.mat');
 
@@ -11,8 +12,7 @@ function [confLess, confEqual, confMore] = exc3d(N, k, lambda, lambdap)
     fv1v2 = @(v1, v2) f(v1).*f(v2).*(1+alpha*(1-F(v1).^p).^(q- ...
         1).*(1-F(v2).^p).^(q-1).*(F(v1).^p.*(1+p*q)- ...
         1).*(F(v2).^p.*(1+p*q)-1));
-
-    %R = 3.5 + 21.5*rand(N,2);
+    
     R = 30*rand(N, 2);
 
     power(:,1) = P(R(:,1));
@@ -21,8 +21,7 @@ function [confLess, confEqual, confMore] = exc3d(N, k, lambda, lambdap)
     IMore = powerTotal > 2.5*10^6;
     ILess = powerTotal < 2.5*10^6;
     IEqual = powerTotal == 2.5*10^6;
-
-    %W = fv1v2(R(:,1), R(:,2)) * 21.5^2; % f(v1,v2)/g(v1,v2)
+    
     W = fv1v2(R(:,1), R(:,2)) * 30^2; % f(v1,v2)/g(v1,v2)
     
     tauLess = sum(W.*ILess)/N;

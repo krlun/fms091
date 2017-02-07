@@ -1,9 +1,11 @@
 function [VPXPY, SPXPY] = exc3c(N, E, C, k, lambda)
-%EXC3C Summary of this function goes here
-%   Detailed explanation goes here
+%EXC3C calculates the variance for the power production of two 
+%Nordex N90-2500 LS wind turbines subject to a bivariate Weibull
+%distribution modelling the wind.
 
 % V(P[X] + P[Y]) = V(P[X]) + V(P[Y]) + 2*cov(P[X], P[Y])
-% cov(P[X], P[Y]) ber?knades tidigare, beh?ver V(P[X]) = V(P[Y])
+% cov(P[X], P[Y]) is assumed to be C and thus supplied,
+% need V(P[X]) = V(P[Y])
 % V(P[X]) = E[P[X]^2] - E[P[X]]^2
 
     load('powercurve_N90.mat');
