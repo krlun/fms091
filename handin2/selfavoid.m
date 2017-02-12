@@ -3,7 +3,7 @@ N = 10000; %Number of simulations
 d = 2; %Number of dimensions
 %% Problem 3
 d = 2;
-n = 7; %Number of steps
+n = 3; %Number of steps
 gn = 1/4; %Possible directions to choose is 4
 wnis = zeros(1, N); %The weights
 phiXi = zeros(1, N); %A boolean function
@@ -30,14 +30,14 @@ for i = 1:N
            matrix(pos(1),pos(2)) = 1; 
        end
        wni = 1/gn*wni*selfavoiding; %I detta fallet alltid samma.
-
-    end
+      
+    end   
     phiXi(i) = selfavoiding;
     wnis(i) = wni;
 end
-Ephi = sum(phiXi.*wnis)/sum(wnis); %Sannolikheten att en walk ?r selfavoiding
-cn = Ephi*4^n % c_n(2) = N_{SA}/N * 4^n
-test = 1/N*sum(wnis)
+Ephi = sum(phiXi.*wnis)/sum(wnis); %Sannolikheten att en walk är selfavoiding
+cn = Ephi*4^n
+cnn = sum(wnis)/N
 %% Problem 4
 d = 2;
 n = 3; %Number of steps
@@ -87,7 +87,7 @@ for i = 1:N
       
     end     
 end
-Ephi = sum(phiXi.*wnis)/(N*(2*d)^n) %Sannolikheten att en walk ?r selfavoiding
+Ephi = sum(phiXi.*wnis)/(N*(2*d)^n) %Sannolikheten att en walk är selfavoiding
 cn = Ephi*(2*d)^n %Above: Should be divided by N*(2*d)^n
 
 %% Problem 5
