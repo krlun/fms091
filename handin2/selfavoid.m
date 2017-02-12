@@ -38,6 +38,7 @@ end
 Ephi = sum(phiXi.*wnis)/sum(wnis); %Sannolikheten att en walk är selfavoiding
 cn = Ephi*4^n
 cnn = sum(wnis)/N
+test
 %% Problem 4
 d = 2;
 n = 3; %Number of steps
