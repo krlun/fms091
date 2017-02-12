@@ -6,7 +6,7 @@ d = 2;
 n = 3; %Number of steps
 gn = 1/4; %Possible directions to choose is 4
 wnis = zeros(1, N); %The weights
-phiXi = zeros(1, N); %A boolean function
+%phiXi = zeros(1, N); %A boolean function
 for i = 1:N
     wni = 1;
     matrix = zeros(2*n + 1, 2*n + 1); %In this problem we only consider two dimensions
@@ -32,18 +32,18 @@ for i = 1:N
        wni = 1/gn*wni*selfavoiding; %I detta fallet alltid samma.
       
     end   
-    phiXi(i) = selfavoiding;
+    %phiXi(i) = selfavoiding;
     wnis(i) = wni;
 end
-Ephi = sum(phiXi.*wnis)/sum(wnis); %Sannolikheten att en walk är selfavoiding
-cn = Ephi*4^n
-cnn = sum(wnis)/N
-lk,jmhng
+%Ephi = sum(phiXi.*wnis)/sum(wnis); %Sannolikheten att en walk är selfavoiding
+%cn = Ephi*4^n
+cn = sum(wnis)/N
+
 %% Problem 4
 d = 2;
-n = 3; %Number of steps
+n = 7; %Number of steps
 wnis = zeros(1, N); %The weights
-phiXi = zeros(1, N); %A boolean function
+%phiXi = zeros(1, N); %A boolean function
 for i = 1:N
     wni = 1;
     matrix = zeros(2*n + 1, 2*n + 1); %In this problem we only consider two dimensions
@@ -77,20 +77,17 @@ for i = 1:N
            else
                pos(2) = pos(2) - 1; %left
            end
-           length(freespots);
            matrix(pos(1),pos(2)) = 1;
            wni = length(freespots)*wni;
        end
-       if j == n
-           phiXi(i) = selfavoiding;
-           wnis(i) = wni;
-       end
-      
+       wni = wni*selfavoiding;   
     end     
+    %phiXi(i) = selfavoiding;
+    wnis(i) = wni;
 end
-Ephi = sum(phiXi.*wnis)/(N*(2*d)^n) %Sannolikheten att en walk är selfavoiding
-cn = Ephi*(2*d)^n %Above: Should be divided by N*(2*d)^n
-
+%Ephi = sum(phiXi.*wnis)/(N*(2*d)^n) %Sannolikheten att en walk är selfavoiding
+%cn = Ephi*(2*d)^n %Above: Should be divided by N*(2*d)^n
+cn = sum(wnis)/N
 %% Problem 5
 
 
