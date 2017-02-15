@@ -41,7 +41,7 @@ cn = sum(wnis)/N
 
 %% Problem 4
 d = 2;
-n = 7; %Number of steps
+n = 5; %Number of steps
 wnis = zeros(1, N); %The weights
 %phiXi = zeros(1, N); %A boolean function
 for i = 1:N
@@ -90,12 +90,14 @@ end
 cn = sum(wnis)/N
 %% Problem 5
 d = 2;
-n = 3;
+n = 6;
 weights = zeros(n, N); %The weights
 matrices = zeros(N, 2*n + 1, 2*n + 1); %Directions of the N walks
 pos = zeros(N,2);
 for i = 1:N
-   matrices(i,n+1,n+1) = 1; 
+   matrices(i,n+1,n+1) = 1;
+   pos(i,1) = n+1;
+   pos(i,2) = n+1;
 end
 currentWeights = ones(1, N);
 for j = 1:n
@@ -119,7 +121,6 @@ for j = 1:n
     pos = newPos;
     currentWeights = ones(1, N);
     for i = 1:N
-       selfavoiding = 1;
        freespots = []; %1 = up, 2 = right, 3 = down, 4 = left
        if matrices(i,pos(i,1)-1,pos(i,2)) == 0 
            freespots = 1; %up is free
@@ -133,10 +134,8 @@ for j = 1:n
        if matrices(i,pos(i,1),pos(i,2)-1) == 0
            freespots = [freespots 4]; %left is free
        end
-       if isempty(freespots) %Not a selfavoiding walk (until we get stuck)
-           selfavoiding = 0;
-       else
-           r = freespots(ceil(rand * length(freespots)));
+       if ~isempty(freespots)
+           r = freespots(randi(length(freespots)));
            if r == 1
                pos(i,1) = pos(i,1) - 1; %up
            elseif r == 2
@@ -147,10 +146,8 @@ for j = 1:n
                pos(i,2) = pos(i,2) - 1; %left
            end
            matrices(i,pos(i,1),pos(i,2)) = 1;
-           wni = length(freespots)*wni;
-       end
-       wni = wni*selfavoiding;   
-       currentWeights(i) = wni;
+       end  
+       currentWeights(i) = length(freespots);
     end
     weights(j,:) = currentWeights;
     
@@ -164,11 +161,57 @@ cn
 %% Problem 6
 
 
-%% Problem 7
-
-
-%% Problem 8
-
-
 %% Problem 9
+d = 3;
+n = 3;
+currentWeights = ones(1, N);
+coords = zeros(1, N, d);
+cn = 1;
+for s = 1:n
+    newCoords = zeros(s, N, d);
+    probs = cumsum(currentWeights/sum(currentWeights));
+    for i = 1:N
+        r = rand;
+        index = 1;
+        for k = 1:N
+            if (r > probs(k))
+                index = k;
+            else
+                break;
+            end
+        end
+        newCoords(:, i, :) = coords(:, k, :);
+    end
+    currentWeights = ones(1,N);
+    newCoords = zeros(1, N, d);
+    for i = 1:N
+        currentPos = squeeze(coords(s, i, :));
+        possibleNext = [];
+        for j = 1:(2*d)
+            possibleNext = [possibleNext currentPos];
+        end
+        %possibleNext = repmat(currentPos, 1, 2*d);
+        for dim = 1:d
+           possibleNext(dim, 2*dim-1) = possibleNext(dim, 2*dim-1) + 1;
+           possibleNext(dim, 2*dim) = possibleNext(dim, 2*dim) - 1;
+        end     
+        freespots = [];
+        for j = 1:(2*d)
+            currCords = (squeeze(coords(:,i,:)))';
+            check = ismember(currCords, possibleNext(:, j)', 'rows');
+            if ~any(check)
+                freespots = [freespots possibleNext(:, j)];
+            end
+        end
+        if ~isempty(freespots)
+            r = ceil(rand * length(freespots));
+            newCoords(1, i, :) = freespots(:, r);
+        end
+        currentWeights(i) = length(freespots(1,:));
+    end
+    coords = [coords newCoords];
+    x = 3
+    cn = cn*sum(currentWeights(i))/N
+end
+cn
 
