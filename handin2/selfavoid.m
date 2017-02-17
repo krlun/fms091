@@ -162,13 +162,14 @@ cn
 
 
 %% Problem 9
-d = 3;
-n = 3;
-currentWeights = ones(1, N);
-coords = zeros(1, N, d);
+d = 4;
+n = 7;
+N = 200;
+currentWeights = ones(1, N); %De nuvarande vikterna!
+coords = zeros(N, n+1, d); %coords(sampel i, efter n steg, dimension d)
 cn = 1;
 for s = 1:n
-    newCoords = zeros(s, N, d);
+    newCoords = zeros(N, s, d);
     probs = cumsum(currentWeights/sum(currentWeights));
     for i = 1:N
         r = rand;
@@ -180,12 +181,13 @@ for s = 1:n
                 break;
             end
         end
-        newCoords(:, i, :) = coords(:, k, :);
+        newCoords(i, :, :) = coords(k, 1:s, :);
     end
-    currentWeights = ones(1,N);
-    newCoords = zeros(1, N, d);
+    coords(:, 1:s, :) = newCoords; %Kordinaterna blir de nya
+    currentWeights = ones(1, N); %Nollställer vikterna
+    newCoords = zeros(N, d); %De nya kordinaterna nollställs
     for i = 1:N
-        currentPos = squeeze(coords(s, i, :));
+        currentPos = squeeze(coords(i, s, :));
         possibleNext = [];
         for j = 1:(2*d)
             possibleNext = [possibleNext currentPos];
@@ -197,21 +199,82 @@ for s = 1:n
         end     
         freespots = [];
         for j = 1:(2*d)
-            currCords = (squeeze(coords(:,i,:)))';
+            currCords = (squeeze(coords(i,:,:)));
             check = ismember(currCords, possibleNext(:, j)', 'rows');
             if ~any(check)
                 freespots = [freespots possibleNext(:, j)];
             end
         end
         if ~isempty(freespots)
-            r = ceil(rand * length(freespots));
-            newCoords(1, i, :) = freespots(:, r);
+            r = ceil(rand * length(freespots(1, :)));
+            newCoords(i, :) = freespots(:, r);
         end
         currentWeights(i) = length(freespots(1,:));
     end
-    coords = [coords newCoords];
-    x = 3
-    cn = cn*sum(currentWeights(i))/N
+    coords(:,s+1,:) = newCoords;
+    cn = cn*sum(currentWeights)/N;
 end
 cn
 
+%% Rester av problem 9
+
+% d = 2;
+% n = 3;
+% N = 10;
+% currentWeights = ones(1, N);
+% coords = zeros(1, N, d);
+% cn = 1;
+% for s = 1:n
+%     if (s ~= 1)
+%         newCoords = zeros(s-1, N, d);
+%         probs = cumsum(currentWeights/sum(currentWeights));
+%         for i = 1:N
+%             r = rand;
+%             index = 1;
+%             for k = 1:N
+%                 if (r > probs(k))
+%                     index = k;
+%                 else
+%                     break;
+%                 end
+%             end
+%             newCoords(:, i, :) = coords(:, k, :);
+%         end
+%     end
+%     coords = newCoords;
+%     currentWeights = ones(1,N);
+%     newCoords = zeros(1, N, d);
+%     for i = 1:N
+%         p = 1;
+%         if s == 1
+%            p = 0; 
+%         end
+%         currentPos = squeeze(coords(s-p, i, :));
+%         possibleNext = [];
+%         for j = 1:(2*d)
+%             possibleNext = [possibleNext currentPos];
+%         end
+%         %possibleNext = repmat(currentPos, 1, 2*d);
+%         for dim = 1:d
+%            possibleNext(dim, 2*dim-1) = possibleNext(dim, 2*dim-1) + 1;
+%            possibleNext(dim, 2*dim) = possibleNext(dim, 2*dim) - 1;
+%         end     
+%         freespots = [];
+%         for j = 1:(2*d)
+%             currCords = (squeeze(coords(:,i,:)))';
+%             check = ismember(currCords, possibleNext(:, j)', 'rows');
+%             if ~any(check)
+%                 freespots = [freespots possibleNext(:, j)];
+%             end
+%         end
+%         if ~isempty(freespots)
+%             r = ceil(rand * length(freespots));
+%             newCoords(1, i, :) = freespots(:, r);
+%         end
+%         currentWeights(i) = length(freespots(1,:));
+%     end
+%     coords = [coords newCoords];
+%     x = 3
+%     cn = cn*sum(currentWeights(i))/N
+% end
+% cn
