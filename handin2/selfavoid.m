@@ -1,8 +1,5 @@
-% Initializing
-N = 10000; %Number of simulations
-d = 2; %Number of dimensions
-%% Problem 3
-d = 2;
+% Problem 3
+N = 10000;
 n = 3; %Number of steps
 gn = 1/4; %Possible directions to choose is 4
 wnis = zeros(1, N); %The weights
@@ -35,12 +32,12 @@ for i = 1:N
     %phiXi(i) = selfavoiding;
     wnis(i) = wni;
 end
-%Ephi = sum(phiXi.*wnis)/sum(wnis); %Sannolikheten att en walk är selfavoiding
+%Ephi = sum(phiXi.*wnis)/sum(wnis); %Sannolikheten att en walk ?r selfavoiding
 %cn = Ephi*4^n
 cn = sum(wnis)/N
 
 %% Problem 4
-d = 2;
+N = 10000;
 n = 5; %Number of steps
 wnis = zeros(1, N); %The weights
 %phiXi = zeros(1, N); %A boolean function
@@ -82,15 +79,12 @@ for i = 1:N
        end
        wni = wni*selfavoiding;   
     end     
-    %phiXi(i) = selfavoiding;
     wnis(i) = wni;
 end
-%Ephi = sum(phiXi.*wnis)/(N*(2*d)^n) %Sannolikheten att en walk är selfavoiding
-%cn = Ephi*(2*d)^n %Above: Should be divided by N*(2*d)^n
 cn = sum(wnis)/N
 %% Problem 5
-d = 2;
-n = 6;
+N = 10000;
+n = 5;
 weights = zeros(n, N); %The weights
 matrices = zeros(N, 2*n + 1, 2*n + 1); %Directions of the N walks
 pos = zeros(N,2);
@@ -159,12 +153,26 @@ end
 cn
 
 %% Problem 6
-
-
+%ln(c_n(2))+ln(n)=ln(A_2)+n*ln(mu_d)+gamma*logn
+vec = (1:n)';
+cns = []; %Värden på c_2(n)
+N = 10000;
+for n = 1:10
+    cns = [cns; prob5(N,n)];
+end
+y = log(cns) + log(vec); %ln(cn(2))+ln(n)
+X = zeros(n, 3);
+X(:, 1) = ones(n, 1);
+X(:, 2) = vec;
+X(:, 3) = log(vec);
+B = (X'*X)\X'*y; %B(1) = log(A), B(2) = log(mu), B(3) = gamma.
+A = exp(B(1))
+mu = exp(B(2))
+gamma = B(3)
 %% Problem 9
-d = 4;
-n = 7;
-N = 200;
+d = 2;
+n = 5;
+N = 2000;
 currentWeights = ones(1, N); %De nuvarande vikterna!
 coords = zeros(N, n+1, d); %coords(sampel i, efter n steg, dimension d)
 cn = 1;
@@ -184,8 +192,8 @@ for s = 1:n
         newCoords(i, :, :) = coords(k, 1:s, :);
     end
     coords(:, 1:s, :) = newCoords; %Kordinaterna blir de nya
-    currentWeights = ones(1, N); %Nollställer vikterna
-    newCoords = zeros(N, d); %De nya kordinaterna nollställs
+    currentWeights = ones(1, N); %Nollst?ller vikterna
+    newCoords = zeros(N, d); %De nya kordinaterna nollst?lls
     for i = 1:N
         currentPos = squeeze(coords(i, s, :));
         possibleNext = [];
