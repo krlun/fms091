@@ -13,7 +13,7 @@ function [cn] = prob5(N, n)
     end
     currentWeights = ones(1, N);
     for j = 1:n
-        newMatrices = zeros(i,2*n+1,2*n+1);
+        newMatrices = zeros(N,2*n+1,2*n+1);
         probabilities = cumsum(currentWeights/sum(currentWeights)); 
         newPos = zeros(N,2);
         for i = 1:N

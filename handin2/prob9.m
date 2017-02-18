@@ -32,14 +32,13 @@ function [cn] = prob9(N, n, d)
             for j = 1:(2*d)
                 possibleNext = [possibleNext currentPos];
             end
-            %possibleNext = repmat(currentPos, 1, 2*d);
             for dim = 1:d
                 possibleNext(dim, 2*dim-1) = possibleNext(dim, 2*dim-1) + 1;
                 possibleNext(dim, 2*dim) = possibleNext(dim, 2*dim) - 1;
             end     
             freespots = [];
+            currCords = (squeeze(coords(i,:,:)));
             for j = 1:(2*d)
-                currCords = (squeeze(coords(i,:,:)));
                 check = ismember(currCords, possibleNext(:, j)', 'rows');
                 if ~any(check)
                     freespots = [freespots possibleNext(:, j)];
