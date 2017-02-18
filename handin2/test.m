@@ -6,7 +6,7 @@ lambdap = norminv(0.975);
 samples = zeros(1, nrOfSamples);
 
 
-for i = 1:nrOfSamples
+parfor i = 1:nrOfSamples
     i
     samples(i) = prob5(N, n);
 end
