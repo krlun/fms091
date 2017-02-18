@@ -1,5 +1,10 @@
-[cn] = prob3(10000, 7);
+N = 10000; n = 7; d = 2;
 
-[cn] = prob4(10000, 7);
+[cn] = prob3(N, n);
 
-[cn] = prob5(10000, 7);
+[cn] = prob4(N, n);
+
+[cn] = prob5(N, n);
+
+
+[cn] = prob9(N, n, d);
