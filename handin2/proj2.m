@@ -54,11 +54,18 @@ end
 
 %% Problem 6
 N = 1000;
-nStop = 8;
+nrOfSamples = 100;
+lambdap = norminv(0.975);
+nStart = 1; nStop = 8;
 
-cns = []; %Values of c_2(n)
-for i = 1:nStop;
-    cns = [cns; prob5(N, i)];
+samples = zeros(nStop-nStart + 1, nrOfSamples);
+I = zeros(nStop-nStart + 1, 3);
+
+for n = nStart:nStop
+    parfor j = 1:nrOfSamples
+        samples(n, j) = prob5(N, n);
+    end
+    cns(n) = sum(samples(n, :))/nrOfSamples;
 end
 
 [A, mu, gamma] = prob6(cns);
