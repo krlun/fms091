@@ -54,30 +54,32 @@ end
 
 %% Problem 6
 N = 1000;
-nrOfEstimations = 10;
+nrOfSamples = 100;
 
-nStart = 1; nStop = 8;
+nStart = 1; nStop = 6;
 
 samples = zeros(nStop-nStart + 1, nrOfSamples);
 
-A = zeros(nrOfEstimations, 1);
-mu = zeros(nrOfEstimations, 1);
-gamma = zeros(nrOfEstimations, 1);
+A = zeros(nrOfSamples, 1);
+mu = zeros(nrOfSamples, 1);
+gamma = zeros(nrOfSamples, 1);
 cns = zeros(n, 1);
 
-for i = 1:nrOfEstimations
+for i = 1:nrOfSamples
     for n = nStart:nStop
-        cns(n) = prob9(N, n, 2);
+        cns(n) = prob5(N, n);
     end
     [A(i), mu(i), gamma(i)] = prob6(cns);
 end
 
-A
-mu
-gamma
-var(A)
-var(mu)
-var(gamma)
+I = zeros(3, 3);
+tauA = sum(A)/nrOfSamples;
+tauMu = sum(mu)/nrOfSamples;
+tauGamma = sum(gamma)/nrOfSamples;
+
+I(1, :) = [tauA-sqrt(var(A)/nrOfSamples), tauA, tauA + sqrt(var(A)/nrOfSamples)];
+I(2, :) = [tauMu-sqrt(var(A)/nrOfSamples), tauMu, tauMu + sqrt(var(A)/nrOfSamples)];
+I(3, :) = [tauGamma-sqrt(var(A)/nrOfSamples), tauGamma, tauGamma + sqrt(var(A)/nrOfSamples)];
 
 %% Problem 9
 N = 1000;

@@ -21,7 +21,6 @@ function [cn] = prob9(N, n, d)
         currentWeights = ones(1, N); %Resetting the weights
         newCoords = zeros(N, d); %The new coordinates zeroed
         for i = 1:N
-            i
             currentPos = squeeze(coords(i, s, :));
             possibleNext = [];
             for j = 1:(2*d)
