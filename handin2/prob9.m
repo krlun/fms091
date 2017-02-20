@@ -8,7 +8,7 @@ function [cn] = prob9(N, n, d)
     currentWeights = ones(1, N); %De nuvarande vikterna!
     coords = zeros(N, n+1, d); %coords(sampel i, efter n steg, dimension d)
     cn = 1;
-    for s = 1:n
+    parfor s = 1:n
         newCoords = zeros(N, s, d);
         probs = cumsum(currentWeights/sum(currentWeights));
         for i = 1:N
@@ -27,6 +27,7 @@ function [cn] = prob9(N, n, d)
         currentWeights = ones(1, N); %Nollst?ller vikterna
         newCoords = zeros(N, d); %De nya kordinaterna nollst?lls
         for i = 1:N
+            i
             currentPos = squeeze(coords(i, s, :));
             possibleNext = [];
             for j = 1:(2*d)
@@ -47,8 +48,10 @@ function [cn] = prob9(N, n, d)
             if ~isempty(freespots)
                 r = ceil(rand * length(freespots(1, :)));
                 newCoords(i, :) = freespots(:, r);
+                currentWeights(i) = length(freespots(1,:));
+            else
+                currentWeights(i) = 0;
             end
-            currentWeights(i) = length(freespots(1,:));
         end
         coords(:,s+1,:) = newCoords;
         cn = cn*sum(currentWeights)/N;

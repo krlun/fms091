@@ -54,6 +54,9 @@ for n = nStart:nStop
 end
 
 %% Problem 6
+N = 1000;
+nStop = 8;
+[A, mu, gamma] = prob6(N, nStop);
 
 %% Problem 9
 N = 1000;

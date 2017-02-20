@@ -5,7 +5,6 @@ function [A, mu, gamma] = prob6(N, nStop)
     %ln(c_n(2)) + ln(n) = ln(A_2) + n*ln(mu_d) + gamma*logn
     vec = (1:nStop)';
     cns = []; %Values of c_2(n)
-    N = 10000;
     for i = vec'
         cns = [cns; prob5(N, i)];
     end
