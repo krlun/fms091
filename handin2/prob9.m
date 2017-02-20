@@ -8,16 +8,13 @@ function [cn] = prob9(N, n, d)
     currentWeights = ones(1, N); %De nuvarande vikterna!
     coords = zeros(N, n+1, d); %coords(sampel i, efter n steg, dimension d)
     cn = 1;
-    parfor s = 1:n
+    for s = 1:n
         newCoords = zeros(N, s, d);
         probs = cumsum(currentWeights/sum(currentWeights));
         for i = 1:N
             r = rand;
-            index = 1;
             for k = 1:N
-                if (r > probs(k))
-                    index = k;
-                else
+                if (r < probs(k))
                     break;
                 end
             end
