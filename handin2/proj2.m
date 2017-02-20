@@ -9,7 +9,7 @@ samples = zeros(nStop-nStart + 1, nrOfSamples);
 I = zeros(nStop-nStart + 1, 3);
 
 for n = nStart:nStop
-    for j = 1:nrOfSamples
+    parfor j = 1:nrOfSamples
         samples(n, j) = prob3(N, n);
     end
     mu = sum(samples(n, :))/nrOfSamples;
@@ -27,7 +27,7 @@ samples = zeros(nStop-nStart + 1, nrOfSamples);
 I = zeros(nStop-nStart + 1, 3);
 
 for n = nStart:nStop
-    for j = 1:nrOfSamples
+    parfor j = 1:nrOfSamples
         samples(n, j) = prob4(N, n);
     end
     mu = sum(samples(n, :))/nrOfSamples;
@@ -45,13 +45,15 @@ samples = zeros(nStop-nStart + 1, nrOfSamples);
 I = zeros(nStop-nStart + 1, 3);
 
 for n = nStart:nStop
-    for j = 1:nrOfSamples
+    parfor j = 1:nrOfSamples
         samples(n, j) = prob5(N, n);
     end
     mu = sum(samples(n, :))/nrOfSamples;
     v = var(samples(n, :));
     I(n, :) = [mu - lambdap*sqrt(v/nrOfSamples), mu, mu + lambdap*sqrt(v/nrOfSamples)];
 end
+
+%% Problem 6
 
 %% Problem 9
 N = 1000;
@@ -64,7 +66,7 @@ samples = zeros(nStop-nStart + 1, nrOfSamples);
 I = zeros(nStop-nStart + 1, 3);
 
 for n = nStart:nStop
-    for j = 1:nrOfSamples
+    parfor j = 1:nrOfSamples
         samples(n, j) = prob9(N, n, d);
     end
     mu = sum(samples(n, :))/nrOfSamples;
@@ -72,25 +74,3 @@ for n = nStart:nStop
     I(n, :) = [mu - lambdap*sqrt(v/nrOfSamples), mu, mu + lambdap*sqrt(v/nrOfSamples)];
 end
 
-%%
-
-%[cn] = prob3(N, n);
-
-%[cn] = prob4(N, n);
-
-%[cn] = prob5(N, n);
-
-
-
-%A = zeros(1, 10);
-%mu = zeros(1, 10);
-%gamma = zeros(1, 10);
-%parfor i = 1:10
-%    i
-%    [A(i), mu(i), gamma(i)] = prob6(N, nStop);
-%end
-
-%[A, mu, gamma] = prob6(N, nStop);
-
-
-%[cn] = prob9(N, n, d);
