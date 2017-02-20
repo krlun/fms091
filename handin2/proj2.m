@@ -35,6 +35,24 @@ for n = nStart:nStop
     I(n, :) = [mu - lambdap*sqrt(v/nrOfSamples), mu, mu + lambdap*sqrt(v/nrOfSamples)];
 end
 
+%% Problem 5
+N = 1000;
+nrOfSamples = 100;
+lambdap = norminv(0.975);
+nStart = 1; nStop = 8;
+
+samples = zeros(nStop-nStart + 1, nrOfSamples);
+I = zeros(nStop-nStart + 1, 3);
+
+for n = nStart:nStop
+    for j = 1:nrOfSamples
+        samples(n, j) = prob5(N, n);
+    end
+    mu = sum(samples(n, :))/nrOfSamples;
+    v = var(samples(n, :));
+    I(n, :) = [mu - lambdap*sqrt(v/nrOfSamples), mu, mu + lambdap*sqrt(v/nrOfSamples)];
+end
+
 %%
 
 samples = zeros(1, nrOfSamples);
