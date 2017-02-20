@@ -2,7 +2,6 @@ function [cn] = prob3(N, n)
 %PROB3 Summary of this function goes here
 %   Detailed explanation goes here
 
-    %n = 3; %Number of steps
     gn = 1/4; %Possible directions to choose is 4
     wnis = zeros(1, N); %The weights
     for i = 1:N

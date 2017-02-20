@@ -2,7 +2,6 @@ function [cn] = prob4(N, n)
 %PROB4 Summary of this function goes here
 %   Detailed explanation goes here
 
-%    n = 5; %Number of steps
     wnis = zeros(1, N); %The weights
 
     for i = 1:N

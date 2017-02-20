@@ -2,11 +2,8 @@ function [cn] = prob9(N, n, d)
 %PROB9 Summary of this function goes here
 %   Detailed explanation goes here
 
-    %d = 4;
-    %n = 7;
-    %N = 200;
-    currentWeights = ones(1, N); %De nuvarande vikterna!
-    coords = zeros(N, n+1, d); %coords(sampel i, efter n steg, dimension d)
+    currentWeights = ones(1, N);
+    coords = zeros(N, n+1, d); %coords(sample i, after n steg, dimension d)
     cn = 1;
     for s = 1:n
         newCoords = zeros(N, s, d);
@@ -20,9 +17,9 @@ function [cn] = prob9(N, n, d)
             end
             newCoords(i, :, :) = coords(k, 1:s, :);
         end
-        coords(:, 1:s, :) = newCoords; %Kordinaterna blir de nya
-        currentWeights = ones(1, N); %Nollst?ller vikterna
-        newCoords = zeros(N, d); %De nya kordinaterna nollst?lls
+        coords(:, 1:s, :) = newCoords; %Copy new coords
+        currentWeights = ones(1, N); %Resetting the weights
+        newCoords = zeros(N, d); %The new coordinates zeroed
         for i = 1:N
             i
             currentPos = squeeze(coords(i, s, :));

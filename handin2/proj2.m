@@ -54,21 +54,30 @@ end
 
 %% Problem 6
 N = 1000;
-nrOfSamples = 100;
-lambdap = norminv(0.975);
+nrOfEstimations = 10;
+
 nStart = 1; nStop = 8;
 
 samples = zeros(nStop-nStart + 1, nrOfSamples);
-I = zeros(nStop-nStart + 1, 3);
 
-for n = nStart:nStop
-    parfor j = 1:nrOfSamples
-        samples(n, j) = prob5(N, n);
+A = zeros(nrOfEstimations, 1);
+mu = zeros(nrOfEstimations, 1);
+gamma = zeros(nrOfEstimations, 1);
+cns = zeros(n, 1);
+
+for i = 1:nrOfEstimations
+    for n = nStart:nStop
+        cns(n) = prob9(N, n, 2);
     end
-    cns(n) = sum(samples(n, :))/nrOfSamples;
+    [A(i), mu(i), gamma(i)] = prob6(cns);
 end
 
-[A, mu, gamma] = prob6(cns);
+A
+mu
+gamma
+var(A)
+var(mu)
+var(gamma)
 
 %% Problem 9
 N = 1000;
