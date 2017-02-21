@@ -63,7 +63,7 @@ samples = zeros(nStop-nStart + 1, nrOfSamples);
 A = zeros(nrOfSamples, 1);
 mu = zeros(nrOfSamples, 1);
 gamma = zeros(nrOfSamples, 1);
-cns = zeros(n, 1);
+cns = zeros(nStop-nStart + 1, 1);
 
 for i = 1:nrOfSamples
     for n = nStart:nStop
@@ -78,8 +78,8 @@ tauMu = sum(mu)/nrOfSamples;
 tauGamma = sum(gamma)/nrOfSamples;
 
 I(1, :) = [tauA-sqrt(var(A)/nrOfSamples), tauA, tauA + sqrt(var(A)/nrOfSamples)];
-I(2, :) = [tauMu-sqrt(var(A)/nrOfSamples), tauMu, tauMu + sqrt(var(A)/nrOfSamples)];
-I(3, :) = [tauGamma-sqrt(var(A)/nrOfSamples), tauGamma, tauGamma + sqrt(var(A)/nrOfSamples)];
+I(2, :) = [tauMu-sqrt(var(mu)/nrOfSamples), tauMu, tauMu + sqrt(var(mu)/nrOfSamples)];
+I(3, :) = [tauGamma-sqrt(var(gamma)/nrOfSamples), tauGamma, tauGamma + sqrt(var(gamma)/nrOfSamples)];
 
 %% Problem 9
 N = 1000;
