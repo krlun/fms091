@@ -1,6 +1,8 @@
 function [cn] = prob9(N, n, d)
-%PROB9 Summary of this function goes here
-%   Detailed explanation goes here
+%PROB9 solves the problem of the number of self-avoiding walkings of
+% length n in d dimenions, using a sequential importance sampling with
+% resampling algorithm. A uniform distribution over all possible free
+% directions is used, using N samples.
 
     currentWeights = ones(1, N);
     coords = zeros(N, n+1, d); %coords(sample i, after n steg, dimension d)

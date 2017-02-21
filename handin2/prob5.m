@@ -1,6 +1,8 @@
 function [cn] = prob5(N, n)
-%PROB5 Summary of this function goes here
-%   Detailed explanation goes here
+%PROB5 solves the problem of the number of self-avoiding walkings of
+% length n in 2 dimenions, using a sequential importance sampling with
+% resampling algorithm. A uniform distribution over all possible free
+% directions is used, using N samples.
 
     matrices = zeros(N, 2*n + 1, 2*n + 1); %Keeping track of the N walks
     pos = zeros(N,2);

@@ -1,6 +1,8 @@
 function [cn] = prob3(N, n)
-%PROB3 Summary of this function goes here
-%   Detailed explanation goes here
+%PROB3 solves the problem of the number of self-avoiding walkings of
+% length n in 2 dimenions, using a sequential importance sampling algorithm.
+% A uniform distribution over all possible directions is used, using
+% N samples.
 
     gn = 1/4; %Possible directions to choose is 4
     wnis = zeros(1, N); %The weights

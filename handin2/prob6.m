@@ -1,6 +1,6 @@
 function [A, mu, gamma] = prob6(cns)
-%PROB6 Summary of this function goes here
-%   Detailed explanation goes here
+%PROB6 performs a least square fit over the values in the vector cns,
+% according to the description in the report for problem 6.
 
     %ln(c_n(2)) + ln(n) = ln(A_2) + n*ln(mu_d) + gamma*logn
 %     vec = (1:nStop)';
