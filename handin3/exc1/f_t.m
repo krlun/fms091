@@ -4,7 +4,8 @@ function [ft] = f_t(lambda, t, tau)
     if issorted(t)
         tDiff = t(2:end) - t(1:end-1);
         n = calcn(t, tau);
-        ft = exp(sum(log(lambda).*n + log(tDiff) - lambda.*tDiff));
+%        ft = exp(sum(log(lambda).*n + log(tDiff) - lambda.*tDiff));
+        ft = exp(-sum(lambda .* tDiff) + sum(log(lambda) .* n) + sum(log(tDiff)));
     else
         ft = 0;
     end

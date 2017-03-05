@@ -4,7 +4,7 @@ function [t] = drawt(lambda, t, tau, rho)
     d = length(t) - 1;
     
     for i = 2:d
-        R = rho*(t(i-1)+t(i+1));
+        R = rho*(t(i+1)-t(i-1));
         tCand = t(i) + R*2*(rand-1/2);
         if ((t(i-1) < tCand) & (tCand < t(i+1)))
             fCand = f_t(lambda, [t(1:i-1) tCand t(i+1:end)], tau);
@@ -13,6 +13,11 @@ function [t] = drawt(lambda, t, tau, rho)
             if (rand < alpha)
                 t(i) = tCand;
             end
+%             if fOld < fCand
+%                 t(i) = tCand;
+%             elseif (rand < fCand/fOld)
+%                 t(i) = tCand;
+%             end
         end
     end
 end
