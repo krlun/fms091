@@ -1,10 +1,9 @@
 clear all;
 load('coal_mine_disasters.mat');
-d = 2;
+d = 5;
 psi = 1;
 rho = 2;
-burn_in = 1000;
-samples = 100000;
+samples = 50000;
 
 % Initialize t
 tStart = 1658;
@@ -18,22 +17,21 @@ t(end) = tStop;
 
 t = [tStart, sort((tStop - tStart) * rand(1, d-1) + tStart), tStop];
 
-
 theta = gamrnd(2, 1/psi);
 lambda = gamrnd(2, 1/theta, 1, d);
 
-all_theta = zeros(samples, 1);
-all_lambda = zeros(samples, d);
-all_t = zeros(samples, d + 1);
+allTheta = zeros(samples, 1);
+allLambda = zeros(samples, d);
+allt = zeros(samples, d + 1);
 
-for i = 1:(samples+burn_in)
+for i = 1:(samples)
     theta = drawTheta(lambda, psi);
     lambda = drawLambda(theta, t, T);
     t = drawt(lambda, t, T, rho);
-    all_theta(i,:) = theta;
-    all_lambda(i,:) = lambda;
-    all_t(i,:) = t;
+    allTheta(i, :) = theta;
+    allLambda(i, :) = lambda;
+    allt(i, :) = t;
 end
 
-plot(all_t(:,2:d))
-mean(all_t)
+plot(allt(:, 2:d))
+mean(allt)
