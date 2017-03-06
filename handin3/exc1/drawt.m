@@ -1,7 +1,8 @@
-function [t] = drawt(lambda, t, tau, rho)
+function [t, accepted] = drawt(lambda, t, tau, rho)
 %DRAWT Summary of this function goes here
 %   Detailed explanation goes here
     d = length(t) - 1;
+    accepted = 0;
     
     for i = 2:d
         R = rho*(t(i+1)-t(i-1));
@@ -11,6 +12,7 @@ function [t] = drawt(lambda, t, tau, rho)
             fOld = f_t(lambda, t, tau);
             alpha = min(1, fCand/fOld);
             if (rand < alpha)
+                accepted = accepted + 1;
                 t(i) = tCand;
             end
 %             if fOld < fCand
