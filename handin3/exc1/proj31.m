@@ -41,4 +41,4 @@ end
 acceptanceRatio = NAccepted/NTrials
 
 plot(allt((burn_in+1):end, 2:d))
-mean(allt)
+mean(allt(burn_in+1):end)
