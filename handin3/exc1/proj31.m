@@ -1,6 +1,6 @@
 clear all;
 load('coal_mine_disasters.mat');
-d = 5;
+d = 4;
 psi = 1;
 rho = 0.007;
 burn_in = 5000;
