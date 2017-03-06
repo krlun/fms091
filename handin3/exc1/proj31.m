@@ -1,14 +1,17 @@
 load('coal_mine_disasters.mat');
 psi = 1;
-d = 3; %Breakpoints + 1
+d = 4; %Breakpoints + 1
 rho = ones(1,d-1);
-burn_in = 5000;
+rho(1) = 0.08;
+rho(2) = 0.005;
+rho(3) = 0.03;
+burn_in = 20000;
 samples = 20000;
 
 % Initialize t
 tStart = 1658;
 tStop = 1980;
-t = [tStart, 1800, 1900, tStop];
+t = [tStart, 1700, 1800, 1930, tStop];
 %t = zeros(1, d+1);
 %t(1) = tStart;
 %t(end) = tStop;
@@ -38,7 +41,7 @@ for i = 1:samples
     theta = drawTheta(lambda, psi);
     lambda = drawLambda(theta, t, T);
     [t, accepted] = drawt(lambda, t, T, rho);
-    NTrials = NTrials + (d-1);
+    NTrials = NTrials + 1;
     NAccepted = NAccepted + accepted;
     allTheta(i, :) = theta;
     allLambda(i, :) = lambda;
