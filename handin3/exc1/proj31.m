@@ -1,8 +1,8 @@
 clear all;
 load('coal_mine_disasters.mat');
-d = 5;
+d = 6;
 psi = 1;
-rho = 0.02;
+rho = 1;
 samples = 50000;
 
 % Initialize t

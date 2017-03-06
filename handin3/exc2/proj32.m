@@ -39,9 +39,11 @@ for i = 1:samples
     returnValues(i) = F_inv(1-1/T, betas(i), mus(i));
 end
 
+m = F_inv(1-1/T, beta, mu);
+
 meanReturnValue = mean(returnValues);
-returnValueSort = sort(returnValues - meanReturnValue);
-returnValueLB = meanReturnValue - returnValueSort(ceil((1-alpha)*samples));
-returnValueUB = meanReturnValue - returnValueSort(ceil((alpha)*samples));
+returnValueSort = sort(returnValues - m);
+returnValueLB = m - returnValueSort(ceil((1-alpha)*samples));
+returnValueUB = m - returnValueSort(ceil((alpha)*samples));
 returnValueI = [returnValueLB returnValueUB]
 
