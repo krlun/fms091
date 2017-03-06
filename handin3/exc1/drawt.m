@@ -11,7 +11,7 @@ function [t, accepted] = drawt(lambda, t, tau, rho)
 %    end
 %    tCand(1) = t(1);
 %    tCand(end) = t(end);
-        R = rho(i)*(t(i+1)-t(i-1));
+        R = rho(i-1)*(t(i+1)-t(i-1));
         tCand = t(i) + R*2*(rand-1/2);
         if ((t(i-1) < tCand) && (tCand < t(i+1)))
             fCand = f_t(lambda, [t(1:i-1) tCand t(i+1:end)], tau);
