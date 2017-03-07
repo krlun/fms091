@@ -1,6 +1,0 @@
-function value = F_theta(theta, psi, lambda)
-%Calculates the value of the unnormalized conditional cumulative
-%distribution function F(theta|lambda, tau, t)
-value = mean(gamcdf(lambda, 2, theta))*gamcdf(theta, 2, psi);
-
-end
