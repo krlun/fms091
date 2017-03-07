@@ -1,6 +1,6 @@
 function [t, accepted] = drawt(lambda, t, tau, rho)
-%DRAWT Summary of this function goes here
-%   Detailed explanation goes here
+%DRAWT draws new t's according to a Metropolis scheme, as well as
+%   calculating the acceptance rate for the various breakpoints.
     d = length(t) - 1;
     accepted = zeros(1,d-1);
     
@@ -15,11 +15,6 @@ function [t, accepted] = drawt(lambda, t, tau, rho)
                 accepted(i-1) = accepted(i-1) + 1;
                 t(i) = tCand;
             end
-%             if fOld < fCand
-%                 t(i) = tCand;
-%             elseif (rand < fCand/fOld)
-%                 t(i) = tCand;
-%             end
         end
     end
 end

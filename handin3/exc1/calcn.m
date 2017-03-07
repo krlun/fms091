@@ -1,6 +1,5 @@
 function [n] = calcn(t, tau)
-%CALCN Summary of this function goes here
-%   Detailed explanation goes here
+%CALCN calculates the number of accidents in a given time interval.
     d = length(t) - 1;
     n = zeros(1, d);
     for i = 1:d
