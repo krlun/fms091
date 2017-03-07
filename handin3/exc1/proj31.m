@@ -1,11 +1,11 @@
 load('coal_mine_disasters.mat');
-psi = 1;
+psi = 2.33;
 d = 4; %Breakpoints + 1
 rho = ones(1,d-1);
 rho(1) = 0.08;
 rho(2) = 0.005;
 rho(3) = 0.03;
-burn_in = 20000;
+burn_in = 0;
 samples = 20000;
 
 % Initialize t
